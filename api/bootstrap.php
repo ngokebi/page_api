@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // create the composer.json file and input the commands in it then run composer dump-autoload on the terminal
 // require "../classes/TaskController.php"; // not using this again
 
-require "../page_api/vendor/autoload.php";
+require "../vendor/autoload.php";
 
 set_error_handler("ErrorHandler::handleError");
 

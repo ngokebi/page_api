@@ -2,20 +2,21 @@
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    require "../phpapi/vendor/autoload.php";
+    require "../page_api/vendor/autoload.php";
     $database = new Database();
     $database = $database->getConnection();
 
-    $sql = "INSERT INTO users (name, email, password, api_key) VALUES(:name, :email, :password, :api_key)";
+
+    $api_key = 'iuuBatOi.NUitkNS6pmnL1ERLLdUfremAdrvyDZRc';
+
+    $sql = "INSERT INTO users (name, email, password, api_key) VALUES ( :name, :email, :password, :api_key)";
 
     $stmt = $database->prepare($sql);
-
-    $api_key = bin2hex(random_bytes(16));
 
     $stmt->bindValue(':name', $_POST["name"], PDO::PARAM_STR);
     $stmt->bindValue(':email', $_POST["email"], PDO::PARAM_STR);
     $stmt->bindValue(':password', password_hash($_POST["password"], PASSWORD_DEFAULT), PDO::PARAM_STR);
-    $stmt->bindValue(':api_key', $api_key, PDO::PARAM_STR);
+    $stmt->bindValue(':api_key', $api_key);
 
     $stmt->execute();
     echo "You have been Registered. Your Api Key is ", $api_key;
