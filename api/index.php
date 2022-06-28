@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require "../vendor/autoload.php";
+require "bootstrap.php";
 
 $full_path =  parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
@@ -22,14 +22,9 @@ if (($id != "bvn-inp-face") && ($id != "bvn-nin-face")) {
     exit;
 }
 
-
 $database = new Database();
 
 $user_gateway = new UserGateway($database);
-
-// // how to check for the authorization header
-// // var_dump($_SERVER["HTTP_AUTHORIZATION"]);
-// // exit;
 
 // // add auth class that checks for api key
 $auth = new Auth($user_gateway);
@@ -42,7 +37,7 @@ if (!$auth->authenticateAPIkey()) {
 $user_id = $auth->getUserID();
 
 
-// $gateway = new TaskGateway($database);
+$gateway = new TaskGateway($database);
 
 $taskcontroller = new TaskController();
 // $gateway, $user_id
