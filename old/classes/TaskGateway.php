@@ -56,7 +56,6 @@ class TaskGateway
         return $this->conn->lastInsertId();
     }
 
-
     public function delete_customer(int $user_id, string $id): int
     {
         $sql = "DELETE FROM task WHERE id = :id AND user_id = :user_id";
