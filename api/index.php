@@ -8,7 +8,13 @@ $full_path =  parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
 $parts = explode("/", $full_path);
 
+if (empty($parts[7])) {
+    http_response_code(404);
+    exit;
+}
+
 $resource = $parts[7];
+
 
 $id = $parts[8] ?? null; // if not set, then set to null 
 
